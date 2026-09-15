@@ -1,0 +1,9 @@
+/* OnDeck radius tokens. Ported unchanged. */
+:root {
+  --radius-xs: 8px; --radius-sm: 12px; --radius-md: 16px; --radius-lg: 20px;
+  --radius-xl: 24px; --radius-2xl: 28px; --radius-pill: 999px;
+  --radius-card: var(--radius-xl);     /* 24px — reference kit card rounding */
+  --radius-control: var(--radius-pill);
+  --radius-field: var(--radius-md);
+  --stroke-icon: 1.75px;               /* outline icon stroke */
+}

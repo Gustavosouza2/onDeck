@@ -1,26 +1,47 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "./styles/tokens/colors.css";
+@import "./styles/tokens/typography.css";
+@import "./styles/tokens/spacing.css";
+@import "./styles/tokens/radius.css";
+@import "./styles/tokens/elevation.css";
+@import "./styles/tokens/motion.css";
+@import "./styles/tokens/base.css";
 
+/* Expose design system tokens to Tailwind's theme layer.
+ *
+ * These are references, not copies: the token files above remain the single
+ * source of the values, so design and code cannot drift. `@theme inline` keeps
+ * the var() indirection so the semantic aliases still resolve per theme. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-bg-app: var(--bg-app);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface-card: var(--surface-card);
+  --color-surface-card-hover: var(--surface-card-hover);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-input: var(--surface-input);
+  --color-surface-accent-soft: var(--surface-accent-soft);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-border-accent: var(--border-accent);
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --color-ink: var(--ink);
+  --color-lilac: var(--lilac-300);
+  --color-citron: var(--citron-400);
+  --color-coral: var(--coral-400);
+  --color-mint: var(--mint-300);
+  --color-sky: var(--sky-300);
+  --color-cream: var(--cream-200);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  --radius-card: var(--radius-card);
+  --radius-control: var(--radius-control);
+  --radius-field: var(--radius-field);
+
+  --ease-standard: var(--ease-standard);
 }

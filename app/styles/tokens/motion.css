@@ -1,0 +1,24 @@
+/* OnDeck motion tokens. Ported unchanged.
+ *
+ * Discreet and quick: three durations, one curve. No bounce, no parallax.
+ * Durations zero out under prefers-reduced-motion, which covers CSS-driven
+ * motion automatically. JavaScript-driven motion must check the preference
+ * explicitly — the animation library does not read these variables.
+ */
+:root {
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+  --dur-slow: 280ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --press-scale: 0.97;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+  }
+}

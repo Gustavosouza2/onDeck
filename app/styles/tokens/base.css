@@ -1,0 +1,50 @@
+/* OnDeck base styles. Ported from the design system.
+ *
+ * The original applied `font-size: var(--text-body)`, which resolved to a color
+ * because of the token collision. It now reads the type scale (--text-base) and
+ * the body color reads --color-body.
+ */
+* ,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-app);
+  color: var(--color-body);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  font-weight: var(--weight-regular);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  color: var(--color-title);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+button { font-family: inherit; }
+
+::selection {
+  background: var(--surface-accent-soft);
+  color: var(--color-title);
+}

@@ -1,0 +1,14 @@
+/* OnDeck spacing tokens. Ported unchanged. 4px grid. */
+:root {
+  --space-0: 0; --space-1: 2px; --space-2: 4px; --space-3: 8px; --space-4: 12px;
+  --space-5: 16px; --space-6: 20px; --space-7: 24px; --space-8: 32px;
+  --space-9: 40px; --space-10: 48px; --space-12: 64px;
+
+  --gutter-screen: 20px; /* left/right screen padding on mobile */
+  --gap-card: 12px;      /* between stacked cards */
+  --pad-card: 16px;      /* inside a card */
+  --pad-card-lg: 20px;
+  --tap-min: 44px;       /* minimum hit target */
+  --appbar-h: 56px;
+  --max-content: 520px;  /* mobile-first max width, centers on tablet/desktop */
+}

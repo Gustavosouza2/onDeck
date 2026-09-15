@@ -1,0 +1,44 @@
+/* OnDeck typography tokens.
+ *
+ * The design system defined --text-body twice with two different meanings: a
+ * color in colors.css and a font size here. Its own base.css then applied
+ * `font-size: var(--text-body)`, which resolved to a color and was invalid;
+ * the design canvas patched it with an override. We resolve it by renaming
+ * instead, per ticket 01.
+ *
+ * Semantic text COLORS are now --color-* (colors.css). The type SCALE keeps the
+ * --text-* namespace, which is also Tailwind's font-size namespace, and is
+ * renamed so no scale step shares a name with a color: hero/display/heading/
+ * lead/base/sm/xs/label vs title/body/muted/faint/accent.
+ */
+:root {
+  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Scale from the reference kit: H1 36 / H2 28 / H3 20 semibold, body 16 regular */
+  --text-hero: 2.25rem;      /* 36px — screen hero, often UPPERCASE */
+  --text-display: 1.75rem;   /* 28px — screen title */
+  --text-heading: 1.25rem;   /* 20px — card / section title */
+  --text-lead: 1.0625rem;    /* 17px — step title */
+  --text-base: 1rem;         /* 16px — body copy */
+  --text-sm: 0.875rem;       /* 14px — helper, meta */
+  --text-xs: 0.8125rem;      /* 13px — chip / tag text */
+  --text-label: 0.75rem;     /* 12px — uppercase eyebrow */
+
+  --leading-tight: 1.04;
+  --leading-snug: 1.22;
+  --leading-normal: 1.45;
+  --leading-relaxed: 1.58;
+
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-label: 0.08em;
+  --tracking-hero: -0.03em;
+}
