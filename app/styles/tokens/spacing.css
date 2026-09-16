@@ -11,4 +11,30 @@
   --tap-min: 44px;       /* minimum hit target */
   --appbar-h: 56px;
   --max-content: 520px;  /* mobile-first max width, centers on tablet/desktop */
+  --max-content-md: 760px;  /* tablet, and every Department page at any width */
+  --max-content-lg: 1120px; /* Home's three-column grid on desktop */
+
+  --control-h-sm: 38px;  /* compact pill button */
+  --control-h-lg: 56px;  /* primary pill button, one-handed target */
+  --focus-offset: 3px;   /* gap between an element and its focus/hover ring */
+
+  /* Component dimensions. Named here so no component carries a magic number;
+     each belongs to one component and says which. */
+  --card-min-h: 172px; --card-min-h-md: 300px; --card-min-h-lg: 340px;
+  --card-puck: 30px; --card-puck-md: 34px;              /* corner arrow */
+  --card-motif-w: 100px; --card-motif-w-md: 124px; --card-motif-w-lg: 140px;
+  --measure-card: 26ch;   /* Department summary on a card */
+  --measure-prose: 46ch;  /* the intro behind "Sobre o departamento" */
+  --onboarding-w: 420px; --onboarding-w-lg: 560px;
+  --onboarding-art-w: 300px; --onboarding-art-w-lg: 360px;
+  --onboarding-motif-w: 200px; /* the welcome Motif inside the art block above */
+  --onboarding-copy-w: 380px;
+  --onboarding-action-w: 320px;
+  --onboarding-note-w: 300px;
+
+  /* Installed on a phone the app paints edge to edge (viewport-fit: cover), so
+     anything docked to an edge has to inset itself past the notch and the home
+     indicator. Zero in a browser tab. */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }

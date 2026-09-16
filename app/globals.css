@@ -8,30 +8,13 @@
 @import "./styles/tokens/motion.css";
 @import "./styles/tokens/base.css";
 
-/* Expose design system tokens to Tailwind's theme layer.
- *
- * These are references, not copies: the token files above remain the single
- * source of the values, so design and code cannot drift. `@theme inline` keeps
- * the var() indirection so the semantic aliases still resolve per theme. */
 @theme inline {
-  --color-bg-app: var(--bg-app);
-  --color-bg-elevated: var(--bg-elevated);
-  --color-surface-card: var(--surface-card);
-  --color-surface-card-hover: var(--surface-card-hover);
-  --color-surface-sunken: var(--surface-sunken);
-  --color-surface-input: var(--surface-input);
-  --color-surface-accent-soft: var(--surface-accent-soft);
-
-  --color-border-subtle: var(--border-subtle);
-  --color-border-default: var(--border-default);
-  --color-border-strong: var(--border-strong);
-  --color-border-accent: var(--border-accent);
-
   --color-ink: var(--ink);
   --color-lilac: var(--lilac-300);
   --color-citron: var(--citron-400);
   --color-coral: var(--coral-400);
   --color-mint: var(--mint-300);
+  --color-rose: var(--rose-300);
   --color-sky: var(--sky-300);
   --color-cream: var(--cream-200);
 
@@ -41,7 +24,92 @@
 
   --radius-card: var(--radius-card);
   --radius-control: var(--radius-control);
-  --radius-field: var(--radius-field);
 
   --ease-standard: var(--ease-standard);
+}
+
+@utility page-container {
+  width: 100%;
+  margin-inline: auto;
+  max-width: var(--max-content);
+  padding-inline: var(--gutter-screen);
+
+  @variant md {
+    max-width: var(--max-content-md);
+    padding-inline: var(--space-8);
+  }
+
+  @variant lg {
+    max-width: var(--max-content-lg);
+    padding-inline: var(--space-9);
+  }
+}
+
+@utility reading-container {
+  width: 100%;
+  margin-inline: auto;
+  max-width: var(--max-content);
+  padding-inline: var(--gutter-screen);
+
+  @variant md {
+    max-width: var(--max-content-md);
+    padding-inline: var(--space-8);
+  }
+}
+
+::view-transition-group(.morph) {
+  animation-duration: var(--dur-slow);
+  animation-timing-function: var(--ease-standard);
+}
+
+::view-transition-old(root) {
+  animation: od-fade-out var(--dur-base) var(--ease-standard) both;
+}
+
+::view-transition-new(root) {
+  animation: od-rise var(--dur-slow) var(--ease-standard) both;
+}
+
+@keyframes od-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes od-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition-property: background-color, border-color, color, fill, stroke,
+    text-decoration-color, outline-color;
+  transition-duration: var(--dur-base);
+  transition-timing-function: var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition: none;
+  }
 }

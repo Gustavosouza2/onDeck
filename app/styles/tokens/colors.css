@@ -1,15 +1,28 @@
 /* OnDeck color tokens.
  *
- * Ported from the design system. Values are unchanged; two things were adapted:
+ * Ported from the design system. Values are unchanged; three things were adapted:
  *
- * 1. The design system ships dark on :root and light behind [data-theme="light"],
- *    because it switches theme by clock time. We follow the system preference
- *    instead (see ADR on design system divergences), so light moves into a
- *    prefers-color-scheme media query. The values are identical.
+ * 1. The design system switches theme by clock time. OnDeck follows the system
+ *    preference by default and lets a Volunteer override it (see docs/adr/0001).
+ *    The document root always carries a concrete data-theme="light" or "dark":
+ *    the head script (lib/theme-script.ts) resolves "automatic" against the
+ *    system before first paint and keeps it in step afterwards. So each theme
+ *    is written exactly once here, under one selector, and nothing else in the
+ *    stylesheet needs to know that "automatic" exists.
  *
  * 2. Semantic text colors are renamed --text-* -> --color-* so they live in
  *    Tailwind's color namespace and no longer collide with the type scale.
  *    See typography.css.
+ *
+ * 3. Semantic aliases with no consumer were removed (status hues, scrim,
+ *    on-tint/on-accent aliases, secondary colours, secondary-soft, sunken,
+ *    elevated and hover surfaces, accent text and accent hover, the focus ring
+ *    alias, icon-active). The primitive ramps below are kept
+ *    whole: they are the design system's scale, and deleting the unused steps
+ *    would leave holes in it rather than remove a feature.
+ *
+ * Without JavaScript the root carries no attribute and the dark defaults on
+ * :root apply — dark is the design system's first theme.
  */
 :root {
   /* Brand accents — lilac primary, citron secondary, coral tertiary.
@@ -24,6 +37,9 @@
   --coral-500: #d9522b; --coral-600: #a63a1b;
 
   --mint-300: #b7ebd2; --sky-300: #afd4f5; --cream-200: #f4efe4;
+  /* Added so each Department carries its own Tint. Same register as mint and
+     sky: light enough for ink text and for the ink Motifs to read over it. */
+  --rose-300: #f3b9ce;
   --ink: #151515; /* text on any accent fill */
 
   /* Near-black neutrals */
@@ -32,97 +48,53 @@
   --gray-700: #a3a3a3; --gray-800: #c9c9c9; --gray-900: #e8e8e8; --gray-950: #ffffff;
   --white: #ffffff;
 
-  /* Status */
-  --hue-live: #f06c45; --hue-ready: #b7ebd2; --hue-soon: #ede55c; --hue-info: #afd4f5;
-
-  /* Semantic aliases — DARK is the default */
+  /* Semantic aliases — DARK. Keep --bg-app in step with GROUND in lib/brand.ts;
+     lib/brand.test.ts fails if they drift. */
   --bg-app: var(--gray-050);
-  --bg-elevated: var(--gray-100);
   --surface-card: var(--gray-100);
-  --surface-card-hover: var(--gray-200);
-  --surface-sunken: var(--gray-000);
   --surface-input: var(--gray-200);
   --surface-accent-soft: rgba(198, 162, 247, 0.16);
-  --surface-secondary-soft: rgba(237, 229, 92, 0.14);
 
   --border-subtle: rgba(255, 255, 255, 0.07);
   --border-default: #2e2e2e;
   --border-strong: #3a3a3a;
-  --border-accent: var(--lilac-400);
 
   /* Renamed from --text-* to --color-*: see header note 2. */
   --color-title: var(--white);
   --color-body: var(--gray-900);
   --color-muted: var(--gray-700);
   --color-faint: var(--gray-600);
-  --color-accent: var(--lilac-300);
-  --color-secondary-accent: var(--citron-300);
-  --color-on-accent: var(--ink);
-  --color-on-tint: var(--ink);
 
   --accent: var(--lilac-300);
-  --accent-hover: var(--lilac-200);
   --accent-press: var(--lilac-500);
-  --accent-ring: rgba(198, 162, 247, 0.35);
-  --secondary: var(--citron-400);
-  --secondary-press: var(--citron-500);
 
   --icon-default: var(--white);
-  --icon-muted: var(--gray-600);
-  --icon-active: var(--white);
 
-  --status-live: var(--hue-live);
-  --status-ready: var(--hue-ready);
-  --status-soon: var(--hue-soon);
-  --status-info: var(--hue-info);
+  /* Emphasis for ink text sitting on a Tint, and for disabled controls. */
+  --on-tint-muted: 0.78;
+  --on-tint-faint: 0.7;
+  --disabled-opacity: 0.38;
 
-  --scrim: rgba(10, 10, 10, 0.76);
   color-scheme: dark;
 }
 
-/* LIGHT theme — same accents, paper ground. */
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg-app: #f3f1ee;
-    --bg-elevated: var(--white);
-    --surface-card: var(--white);
-    --surface-card-hover: #f7f5f2;
-    --surface-sunken: #e7e4df;
-    --surface-input: #eeece8;
-    --surface-accent-soft: rgba(135, 99, 199, 0.14);
-    --surface-secondary-soft: rgba(172, 163, 31, 0.16);
+/* LIGHT — same accents, paper ground. The only light block in the stylesheet. */
+:root[data-theme="light"] {
+  --bg-app: #f3f1ee;
+  --surface-card: var(--white);
+  --surface-input: #eeece8;
+  --surface-accent-soft: rgba(135, 99, 199, 0.14);
 
-    --border-subtle: rgba(21, 21, 21, 0.07);
-    --border-default: #ddd9d3;
-    --border-strong: #c3bfb8;
-    --border-accent: var(--lilac-600);
+  --border-subtle: rgba(21, 21, 21, 0.07);
+  --border-default: #ddd9d3;
+  --border-strong: #c3bfb8;
 
-    --color-title: var(--ink);
-    --color-body: #232323;
-    --color-muted: #5e5e5e;
-    --color-faint: #8a8a8a;
-    --color-accent: var(--lilac-700);
-    --color-secondary-accent: var(--citron-700);
-    --color-on-accent: var(--ink);
-    --color-on-tint: var(--ink);
+  --color-title: var(--ink);
+  --color-body: #232323;
+  --color-muted: #5e5e5e;
+  --color-faint: #8a8a8a;
 
-    --accent: var(--lilac-300);
-    --accent-hover: var(--lilac-400);
-    --accent-press: var(--lilac-500);
-    --accent-ring: rgba(135, 99, 199, 0.28);
-    --secondary: var(--citron-400);
-    --secondary-press: var(--citron-500);
+  --icon-default: var(--ink);
 
-    --icon-default: var(--ink);
-    --icon-muted: #8a8a8a;
-    --icon-active: var(--ink);
-
-    --status-live: var(--coral-500);
-    --status-ready: #2f7f59;
-    --status-soon: var(--citron-700);
-    --status-info: #3b78ae;
-
-    --scrim: rgba(21, 21, 21, 0.45);
-    color-scheme: light;
-  }
+  color-scheme: light;
 }

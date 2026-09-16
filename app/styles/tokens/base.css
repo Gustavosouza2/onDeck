@@ -4,47 +4,56 @@
  * because of the token collision. It now reads the type scale (--text-base) and
  * the body color reads --color-body.
  */
-* ,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-  background: var(--bg-app);
-  color: var(--color-body);
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  line-height: var(--leading-normal);
-  font-weight: var(--weight-regular);
-  -webkit-font-smoothing: antialiased;
-}
+/* Wrapped in @layer base so Tailwind utilities can override these. Unlayered
+ * CSS beats every cascade layer, so leaving them outside a layer would let
+ * `a:hover { text-decoration: underline }` defeat a `hover:no-underline`
+ * utility no matter how specific the utility is. */
+@layer base {
+  * ,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  font-weight: var(--weight-bold);
-  color: var(--color-title);
-  letter-spacing: var(--tracking-tight);
-  line-height: var(--leading-tight);
-  margin: 0;
-}
+  body {
+    margin: 0;
+    background: var(--bg-app);
+    color: var(--color-body);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-regular);
+    -webkit-font-smoothing: antialiased;
+  }
 
-p { margin: 0; }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    color: var(--color-title);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    margin: 0;
+  }
 
-a {
-  color: var(--color-accent);
-  text-decoration: none;
-}
+  p { margin: 0; }
 
-a:hover {
-  color: var(--accent-hover);
-  text-decoration: underline;
-}
+  /* A link takes the colour of the text around it and is marked by its
+     underline. Accent is a fill, never thin text on the near-black ground, so
+     it is not the design system's link colour here. */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-button { font-family: inherit; }
+  a:hover {
+    text-decoration: underline;
+  }
 
-::selection {
-  background: var(--surface-accent-soft);
-  color: var(--color-title);
+  button { font-family: inherit; }
+
+  ::selection {
+    background: var(--surface-accent-soft);
+    color: var(--color-title);
+  }
 }

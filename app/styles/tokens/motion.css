@@ -1,18 +1,28 @@
-/* OnDeck motion tokens. Ported unchanged.
+/* OnDeck motion tokens.
  *
  * Discreet and quick: three durations, one curve. No bounce, no parallax.
  * Durations zero out under prefers-reduced-motion, which covers CSS-driven
  * motion automatically. JavaScript-driven motion must check the preference
- * explicitly — the animation library does not read these variables.
+ * explicitly — the animation library does not read these variables, so
+ * lib/motion.ts restates --dur-base, --ease-standard and --rise, and
+ * lib/motion.test.ts fails if any of the three drift apart.
  */
 :root {
   --dur-fast: 120ms;
   --dur-base: 180ms;
   --dur-slow: 280ms;
   --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --press-scale: 0.97;
+
+  /* How far a hovered card rises. */
+  --hover-lift: 3px;
+
+  /* How far an arriving block rises, in CSS-driven motion (od-rise below) and
+     restated as RISE_PX in lib/motion.ts for JavaScript-driven motion.
+     lib/motion.test.ts fails if the two drift apart. */
+  --rise: 8px;
+
+  /* Pressing darkens a fill; it never scales or moves. How much darker: */
+  --press-darken: 0.94;
 }
 
 @media (prefers-reduced-motion: reduce) {
