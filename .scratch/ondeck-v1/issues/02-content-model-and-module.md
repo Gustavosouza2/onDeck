@@ -1,10 +1,10 @@
 # 02: Content model, content module, and its tests
 
-**What to build:** The six Departments exist as typed, validated content, reachable through a single module that the rest of the app will consume. A Maintainer editing a Runbook in the repository gets a build failure when the content is malformed, rather than a broken page in production. This is the app's only test seam.
+**What to build:** The six Departments exist as typed, validated content, reachable through a single module that the rest of the app will consume. A Maintainer editing a Runbook in the repository gets a build failure when the content is malformed, rather than a broken page in production. ~~This is the app's only test seam.~~ **Revised (2026-09-16):** component tests were added at the product owner's request; see spec.md § Testing Decisions. This module remains the only test seam at the `lib/**/*.test.ts` logic layer.
 
 **Blocked by:** None (can start immediately).
 
-**Status:** ready-for-agent
+**Status:** resolved
 
 - [x] A Department carries: slug, name, one-line summary, primary Tool, a note about that Tool, intro text, Tint, Motif, icon name, update date, and an ordered list of Steps.
 - [x] A Step carries: a required title, a detail, a Phase, and optionally the name of a specific Tool.

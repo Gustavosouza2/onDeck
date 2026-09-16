@@ -4,7 +4,7 @@
 
 **Blocked by:** None (can start immediately).
 
-**Status:** ready-for-agent
+**Status:** resolved
 
 - [x] ADR on deliberate divergences from the design system, covering three changes: theme by system preference instead of clock time (the design system asks for clock-based switching; under server rendering that guarantees a hydration mismatch and overrides the person's explicit preference); removal of progress persistence and the "resume where you left off" card (state never expired, crossed weeks, and occupied Home's most valuable space with stale information); removal of the `time` and `cadence` fields (no screen consumed them).
 - [x] ADR on shipping an installable PWA with no service worker and no offline support. Covers why the silent failure mode of a stale cache is worse than the loud failure of not opening without a network, why the framework's experimental connectivity-detection feature does not solve it, and what would trigger adding one.

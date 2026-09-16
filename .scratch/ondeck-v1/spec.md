@@ -19,7 +19,7 @@ An internal guide app, installable to the phone's home screen, with no login. Th
 
 Each Department offers two readings, because there are two distinct uses:
 
-- **List mode** — the whole Runbook on one page, filtered by Phase. The reference reading: "which step was it where I set up the audio?"
+- **List mode** — the whole Runbook on one page, as Step titles grouped by Phase. The reference reading: "which step was it where I set up the audio?"
 - **Focus mode** — one Step per screen, with previous and next. The execution reading: a new Volunteer following the Runbook live, one action at a time.
 
 Content lives in the repository, edited by the Maintainer. The app is entirely static: every page is prerendered at build time and served from the CDN.
@@ -52,16 +52,19 @@ Content lives in the repository, edited by the Maintainer. The app is entirely s
 16. As a Volunteer, I want to see which Tool the Department uses, prominently, so that I know what to open.
 17. As a Volunteer, I want a note about where the Tool lives and how to reach it, so that I don't waste time working out which machine or which profile.
 18. As a Volunteer, I want every Step numbered and in order on a single page, so that I can scroll and locate a specific Step quickly.
-19. As a Volunteer, I want each Step to have a short imperative title and an explanatory detail, so that I grasp the action without reading a paragraph.
+19. ~~As a Volunteer, I want each Step to have a short imperative title and an explanatory detail, so that I grasp the action without reading a paragraph.~~ **Removed (2026-09-15):** List mode shows each Step's short imperative title only; the explanatory detail is shown in Focus mode (see 33).
 20. As a Volunteer, I want a Step involving a specific Tool to show that Tool's name highlighted, so that I know where to perform the action.
-21. As a Volunteer, I want to filter Steps by Phase, so that I see only the portion of the Runbook that matters right now.
-22. As a Volunteer, I want the filter to include an "all" option showing the entire Runbook, so that I return to the full view in one tap.
-23. As a Volunteer in a Department with only one Phase, I want the filter not to appear at all, so that the screen doesn't show a useless control.
+21. ~~As a Volunteer, I want to filter Steps by Phase, so that I see only the portion of the Runbook that matters right now.~~ **Removed (2026-09-15):** the Phase filter was removed. Phase headings group the Runbook instead (see 62).
+22. ~~As a Volunteer, I want the filter to include an "all" option showing the entire Runbook, so that I return to the full view in one tap.~~ **Removed (2026-09-15):** filter removed.
+23. ~~As a Volunteer in a Department with only one Phase, I want the filter not to appear at all, so that the screen doesn't show a useless control.~~ **Removed (2026-09-15):** filter removed.
 24. As a Volunteer, I want to read at the end of the page what to do if I get stuck, so that I have an out instead of improvising.
 25. As a Volunteer, I want to see when the Runbook was last updated, so that I know whether I'm following current information.
 26. As a Volunteer, I want to return to Home in one tap, so that I switch Departments without the browser's back button.
-27. As a Volunteer on desktop or a large tablet, I want a sticky outline of the Steps in a side column, so that I jump to a Step without scrolling the whole page.
-28. As a Volunteer on desktop, I want clicking an outline entry to take me to that Step, so that navigation is direct.
+27. ~~As a Volunteer on desktop or a large tablet, I want a sticky outline of the Steps in a side column, so that I jump to a Step without scrolling the whole page.~~ **Removed (2026-09-15):** the desktop outline was removed; List mode as titles fits without one.
+28. ~~As a Volunteer on desktop, I want clicking an outline entry to take me to that Step, so that navigation is direct.~~ **Removed (2026-09-15):** outline removed.
+
+62. As a Volunteer, I want the Steps grouped under a heading for each moment of the service — before, during, closing — so that I see where the pre-service work ends and the service begins without operating a control.
+63. As a Volunteer, I want the paragraph about what a Department is for tucked behind "Sobre o departamento", so that the Steps are on the first screen every week and the orientation is there the one time I need it.
 
 ### Department page — Focus mode
 
@@ -77,11 +80,12 @@ Content lives in the repository, edited by the Maintainer. The app is entirely s
 38. As a Volunteer on the last Step, I want a clear indication that the Runbook is over, so that I know I'm done.
 39. As a Volunteer in Focus mode, I want to see what the next Step is before advancing, so that I can prepare for the next action.
 40. As a Volunteer in Focus mode, I want to return to List mode at any point, so that I recover the overview when I need it.
-41. As a Volunteer who filtered by Phase and then entered Focus mode, I want to step only through that Phase's Steps, so that Focus mode respects the filter I chose.
+41. ~~As a Volunteer who filtered by Phase and then entered Focus mode, I want to step only through that Phase's Steps, so that Focus mode respects the filter I chose.~~ **Removed (2026-09-15):** filter removed; Focus mode steps through the whole Runbook.
 
 ### Reading and accessibility
 
 42. As a Volunteer using my phone in a dark sanctuary, I want the app to use a dark theme when my phone is dark, so that I'm not blinded.
+42b. As a Volunteer, I want to override the theme by hand and have that stick, so that the app matches what I can actually read in the room I'm in.
 43. As a Volunteer whose phone is in a light theme, I want the app to be light, so that it respects my system preference.
 44. As a Volunteer, I want every tap target large enough to hit one-handed, so that I use the app while holding something else.
 45. As a Volunteer on a tablet, I want the content to use the screen width better, so that it isn't a narrow column in an empty field.
@@ -97,6 +101,14 @@ Content lives in the repository, edited by the Maintainer. The app is entirely s
 52. As a Volunteer, I want changing Step in Focus mode to have direction (out one side, in the other), so that I perceive whether I advanced or went back.
 53. As a Volunteer, I want immediate visual feedback when pressing buttons and cards, so that I know the tap registered.
 
+### Home and installation
+
+64. As a Volunteer, I want Home centred in the screen with the theme control inside its header, so that the composition reads as one block and the control is where my thumb already is.
+65. As a Volunteer on a browser that can install apps, I want Home to offer to put OnDeck on my home screen, so that I open it without looking for the link.
+66. As a Volunteer on an iPhone or iPad, I want Home to tell me the Share → "Adicionar à Tela de Início" gesture, so that I can install it on a browser that offers no install button.
+67. As a Volunteer, I want to wave that offer away once and not see it again, so that it does not nag me every Sunday.
+68. As a Volunteer using a keyboard or screen reader on my first visit, I want the welcome screen to behave as a dialog — focus on "Começar", nothing behind it reachable, Escape to close — so that I cannot skip it into a page that will show it again.
+
 ### Maintainer
 
 54. As the Maintainer, I want to edit Department content in a file in the repository, so that I depend on no admin panel and no external service.
@@ -107,6 +119,7 @@ Content lives in the repository, edited by the Maintainer. The app is entirely s
 59. As the Maintainer, I want all content access to go through a single module, so that swapping the repository for a CMS later doesn't touch any page.
 60. As the Maintainer, I want the app excluded from search engine indexing, so that internal content doesn't surface on Google.
 61. As the Maintainer, I want deploys to happen on every push, so that shipping a correction is a commit.
+69. As the Maintainer, I want the build to fail if two Departments share a Tint, so that every card on Home stays recognisable by colour alone.
 
 ## Implementation Decisions
 
@@ -124,7 +137,7 @@ A **Department** has: slug, name, one-line summary, primary Tool, a note about t
 
 A **Step** has: a required title, a detail, a **Phase**, and optionally the name of a specific Tool.
 
-**Phase** is a label on each Step, not a container grouping them. Identifiers are English (`before`, `service`, `closing`, `week`); the labels rendered to Volunteers stay Portuguese. This shape is what lets the "all" filter show the entire sequence without flattening a hierarchy.
+**Phase** is a label on each Step, not a container grouping them. Identifiers are English (`before`, `service`, `closing`, `week`); the labels rendered to Volunteers stay Portuguese. This shape keeps the Runbook one ordered sequence while List mode groups it under a heading per Phase.
 
 Two fields present in the design's original data were **removed from the schema** because no screen consumed them: `time` (a Step's relative clock time) and `cadence` (service vs. week). The same criterion applied in both cases: data no screen consumes does not enter the model. The arrival-time information the `time` field carried is preserved, where it matters, inside the Department's intro text.
 
@@ -148,19 +161,23 @@ The build doubles as the content integrity test: an invalid schema, a duplicate 
 
 ### UI state
 
-**List mode** and **Focus mode** are client state within the Department page, not separate routes. So is the Phase filter. None of it enters the URL in V1.
+**List mode** and **Focus mode** are client state within the Department page, not separate routes, and so is whether "Sobre o departamento" is open. None of it enters the URL in V1.
+
+List mode shows each Step's number and title, grouped by Phase: one ordered list per Phase, starting at the Step's real number and labelled by its Phase heading, so the numbering survives for assistive technology. A Step's detail appears only in Focus mode. There is no Phase filter and no desktop outline; both were built and removed by product decision.
 
 **There is no progress persistence.** The original design stored the Volunteer's position in `localStorage` and showed a "resume where you left off" card on Home; both were removed. The reason: the state never expired, it crossed weeks, and the card occupied Home's most valuable space to display stale information.
 
-The only `localStorage` use in V1 is the "onboarding already seen" flag. The onboarding screen is overlaid on Home on the client after reading that flag; Home itself remains static and prerendered.
+Browser storage holds exactly three flags in V1: onboarding already seen, the explicit theme choice, and install invitation dismissed. None of them is a Volunteer's position. The onboarding screen is overlaid on Home on the client after reading its flag; Home itself remains static and prerendered.
 
 ### Theme
 
-The theme follows the system's `prefers-color-scheme`, via pure CSS. There is no manual toggle and no automatic switch by time of day.
+The theme has three states — automatic, light and dark — offered as a segmented control on Home and in the AppBar. Automatic is the default and follows the system's `prefers-color-scheme`; an explicit choice is remembered in the browser and wins over the system in both directions. A blocking script in the document head resolves the preference to a concrete `data-theme` on the root before first paint, follows the system while the page is open, and keeps the browser's theme-color on the ground of the theme actually shown. Switching theme cross-fades colour over the base duration.
+
+There is no automatic switch by time of day.
 
 The original design system specifies switching automatically by clock time. This was deliberately discarded: under server rendering it guarantees a hydration mismatch (the server does not know the client's clock), and it overrides the person's explicit preference. The real goal — not blinding the Volunteer during an evening service — is met by `prefers-color-scheme`, since someone using their phone at night usually already has the system in dark.
 
-The design system's color tokens are written with dark as the default and light behind an attribute selector. The adaptation inverts that into a media query, keeping the values identical.
+The design system's color tokens are written with dark as the default and light behind an attribute selector, and that shape is kept: because the head script always stamps a resolved theme, the light palette is written once under `[data-theme="light"]`. Semantic aliases with no consumer were removed; the primitive ramps are kept whole as the design system's scale.
 
 ### Design system
 
@@ -170,7 +187,9 @@ Typography: Space Grotesk (display) and DM Sans (body), with JetBrains Mono for 
 
 There is a known bug in the design system: the token `--text-body` is defined twice with different meanings — as a color in the color tokens and as a font size in the typography tokens. The base CSS applies `font-size: var(--text-body)` to `body`, which resolves to a color value and is invalid. The design canvas works around it with an override. **The port must resolve the collision by renaming, not replicate the workaround.**
 
-Components to build, in React: Button, Chip, Tag, Icon, Illustration, DepartmentCard, StepItem, ToolCallout, SectionHeader, AppBar.
+Components built, in React: Button, Tag, Icon, Motif, Eyebrow, SectionHeader, AppBar, ThemeToggle, DepartmentCard, DepartmentView, PhaseGroup, StepItem, FocusMode, OnboardingGate, InstallPrompt. Chip (for the removed Phase filter) and ToolCallout (merged into the Tint block as a "Ferramenta principal" field) were built and later removed.
+
+Home is centred in the viewport. Section and Phase labels are sentence case; the tracked uppercase eyebrow survives only above Home's heading, on Department cards, and on the onboarding screen. Rose was added to the palette so that every Department has its own Tint, and the build rejects a duplicate.
 
 Design system components deliberately **not** ported, because no screen uses them: TabBar, ActionBar, IconButton, EmptyState, and the generic Card. The design system's readme describes a fixed bottom TabBar that none of the three screens actually uses.
 
@@ -191,7 +210,9 @@ Motion follows the design system's tokens: 120/180/280ms durations, a single cur
 
 The motion tokens zero out durations under `prefers-reduced-motion`, which covers CSS automatically. The `motion` library does not read those variables: the preference must be checked explicitly in JavaScript.
 
-Animations **deliberately excluded**: a crossfade when changing the Phase filter (the person filtered in order to read; animation delays reading) and staggering the Home cards (charming once, irritating the hundredth time — and Home is the screen opened every week).
+In-page motion is reserved for things that answer a Volunteer's action and show what changed: the theme control's fill sliding between segments, "Sobre o departamento" opening, the install invitation arriving and leaving, the onboarding screen fading on dismiss.
+
+Animations **deliberately excluded**: staggering the Home cards (charming once, irritating the hundredth time — and Home is the screen opened every week), entrance animations on sections, and hover motion on anything that is not a control. Pressing never scales; it darkens a fill.
 
 ### PWA
 
@@ -200,6 +221,10 @@ The app is installable: manifest, icons, standalone display. **There is no servi
 This was evaluated and declined for V1. Real offline support would require a cache invalidation strategy, and that strategy's silent failure mode — a Volunteer following stale Steps without knowing — is worse than the loud failure of not opening without a network. Content being 100% static keeps the path back cheap if the decision changes.
 
 The framework's experimental connectivity-detection feature does not solve this case: it keeps requests pending and retries when the network returns, but a reload while offline still fails.
+
+### Install invitation
+
+Home offers installation where the browser allows it. On Chromium the `beforeinstallprompt` event is kept and replayed from an "Instalar" tap. WebKit on iPhone and iPad never fires it, so there the invitation names the Share → "Adicionar à Tela de Início" gesture instead. It renders nothing when already installed or when neither path exists, and a dismissal is remembered. The rules that tell these cases apart live in `lib/install.ts`.
 
 ### Privacy and deploy
 
@@ -219,30 +244,39 @@ Three decisions need an ADR, being hard to reverse and contradicting the design 
 
 ## Testing Decisions
 
-There is no test infrastructure in the repository today: no framework, no test script.
+Vitest, in two projects: `logic` runs in Node, `components` runs in jsdom with Testing Library. `npm test` runs both.
 
-**What makes a good test here:** test observable external behaviour, never implementation detail. A test that breaks when markup changes but behaviour doesn't is a bad test.
+**What makes a good test here:** test observable external behaviour, never implementation detail. A test that breaks when markup changes but behaviour doesn't is a bad test. Component tests find elements the way a Volunteer or a screen reader does — by role, accessible name and visible text — and assert on what is on screen and what a tap or a key does, never on class names or internal state.
 
-**One seam, and only one: the content module.** It is the only place in V1 with logic that can genuinely break, and it is the boundary the rest of the app consumes. Testing there covers the real risk without coupling tests to markup.
+**Revised 2026-09-16.** The first version of this spec deliberately excluded component tests, on the grounds that the components were presentation over tokens. By the end of implementation that was no longer true: onboarding modality, install eligibility, three-state theming, Focus mode navigation and accessible list numbering all carry rules, and several were broken during implementation without a test to notice. Component tests were added at the product owner's request.
 
-What to test at that seam:
+### Logic (`lib/**/*.test.ts`)
 
-- An existing Department comes back with every field the schema requires.
-- An unknown slug is handled the way the route expects, and does not throw unhandled.
-- The Department list comes back in the order declared in the content, which is Home's order.
-- Step order within a Department is preserved.
-- A malformed Step — no title, invalid Phase — is rejected by schema validation.
-- A Department with no Steps is rejected.
-- Duplicate slugs across Departments are rejected.
-- Every declared slug has a corresponding Motif available, and every declared Tint exists in the palette.
+- **Content module** — the original seam. An existing Department returns every required field; an unknown slug returns null rather than throwing; Department and Step order are preserved; a malformed Step, an empty Runbook, a duplicate slug and a duplicate Tint are rejected; every Motif has an asset.
+- **Reading rules** — Steps number across the whole Runbook; grouping by Phase keeps order and numbering; a Focus mode position cannot leave the Runbook.
+- **Install eligibility** — iOS detection (including an iPad reporting a Mac user agent) and when there is anything to offer.
+- **Theme resolution** — automatic follows the system; an explicit choice wins in both directions.
+- **Drift between TypeScript and CSS** — the ground colour used by the manifest and theme-color matches `--bg-app` in both themes; the JavaScript motion duration and curve match the motion tokens. These exist because those values must be restated outside CSS, and a restated value drifts silently.
+
+### Components (`components/**/*.test.tsx`, `lib/**/*.dom.test.ts`)
+
+- **Head script** — run as the exact string the browser runs, in a document: resolves automatic before paint, honours a stored choice, ignores an invalid one, creates exactly one theme-color tag, follows a system change on automatic and keeps an explicit choice through one.
+- **ThemeToggle** — three states with automatic selected by default; choosing light or dark applies, remembers and updates theme-color; automatic forgets the choice; the compact variant's icon-only buttons have full accessible names; every toggle on a page stays in step.
+- **DepartmentCard** — one link to the Department page carrying name, summary, Tool and Step count; singular count; the Motif is not exposed.
+- **AppBar** — names the page, links back, carries the theme control.
+- **DepartmentView, List mode** — Tool and note, update date, every Step title with no detail, one ordered list per Phase labelled by its heading and starting at the Step's real number, the number read as part of the Step, no Phase headings for a single-Phase Runbook, the intro closed and inert until opened.
+- **DepartmentView, Focus mode** — starts at Step 1 with its detail and progress; previews the next Step; previous is disabled on the first; forward and back move one Step; the last Step says so and disables next; a Step's own Tool shows; returning to the list and back starts again from Step 1.
+- **OnboardingGate** — a labelled dialog on first visit with focus on "Começar"; Home behind it inert and unscrollable; "Começar" and Escape both close it and remember; a return visit shows Home directly.
+- **InstallPrompt** — nothing until the browser says the app is installable; then an invitation that prevents the browser's own prompt and replays it on "Instalar"; "Agora não" dismisses for good; nothing when already installed; on iPhone, the Share gesture instead of a button, and nothing once dismissed.
+
+**Replaced in jsdom, not tested:** `next/link` (an anchor), `next/image` (an `<img>`), and `TintMorph`, a passthrough around React's `<ViewTransition>`, which only the React bundled by Next exports and only a browser can animate. Animations are skipped in component tests; reduced motion and the morph were verified in a real browser.
 
 **Deliberately not tested:**
 
-- **UI components.** They are presentation over tokens. Render tests here become implementation tests and freeze the design.
-- **Routes.** Build-time slug enumeration with unknown slugs refused means a broken slug fails the build. The build is the test, and it is stronger than any assertion I would write.
-- **List mode and Focus mode.** Component state with no business rules; the cost of the test exceeds the risk.
+- **Routes.** Build-time slug enumeration with unknown slugs refused means a broken slug fails the build. The build is the test.
+- **Visual appearance.** Colour, spacing and layout are checked in a browser, not asserted in jsdom, which has no layout engine.
 
-**Prior art:** none. This is the repository's first test, so choosing the framework and wiring it up is part of the work. Pick whatever integrates with the existing toolchain with the least configuration.
+**How the tests were checked:** each component behaviour above was deliberately broken in the code — list numbering, the disabled first "Anterior", the install event's `preventDefault`, Home's `inert`, theme-color following the toggle, the visible Step number — and a test failed each time. The drift tests were checked the same way.
 
 ## Out of Scope
 
@@ -255,7 +289,6 @@ What to test at that seam:
 - In-app search.
 - Images and screenshots in Steps. The schema supports them; V1 content ships without.
 - Distinguishing service-day Departments from week-day Departments on Home. Evaluated and declined: Home is a flat list.
-- A manual theme toggle.
 - Multiple languages. The app's copy is Brazilian Portuguese.
 - Analytics.
 - `shadcn/ui`. It arrives when the first component genuinely needing Radix appears.
@@ -268,4 +301,4 @@ What to test at that seam:
 
 **On design access.** Reading the design project requires design-system authorization on the account (`/design-login`). The relevant files are the composed screen, the data file, and the design system tokens.
 
-**One question open for review.** The test seam above — the content module as the single test point — was derived from risk, but was never explicitly confirmed. If the Maintainer expects component or route coverage, that section changes.
+~~**One question open for review.** The test seam above — the content module as the single test point — was derived from risk, but was never explicitly confirmed. If the Maintainer expects component or route coverage, that section changes.~~ **Removed (2026-09-16):** answered. Component tests were added at the product owner's request; see § Testing Decisions above.

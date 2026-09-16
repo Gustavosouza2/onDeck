@@ -4,12 +4,12 @@
 
 **Blocked by:** 04 (tracer bullet).
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] The screen shows the `welcome` Motif over a filled accent block. The design reserved a flat rectangle there for a mascot that does not exist yet; the existing Motif takes that slot, and a mascot would later replace it in the same place.
-- [ ] Copy states what OnDeck is in one sentence, names the six Departments in a supporting line, says no login is needed, and says to reach the media lead with questions.
-- [ ] A single large primary action moves the Volunteer to Home.
-- [ ] The screen appears only on a Volunteer's first visit. A flag in browser storage records that it has been seen.
-- [ ] Home itself stays static and prerendered. Onboarding is overlaid on the client after the flag is read; Home is never made dynamic to accommodate it.
-- [ ] Reading or writing the flag never throws, and the app renders correctly when storage is unavailable or empty — a private window, cleared site data, a different browser. In that case the Volunteer simply sees onboarding again.
-- [ ] Copy is Brazilian Portuguese and never addresses the Volunteer by name: there are no accounts and no identity in the app.
+- [x] The screen shows the `welcome` Motif over a filled accent block. The design reserved a flat rectangle there for a mascot that does not exist yet; the existing Motif takes that slot, and a mascot would later replace it in the same place.
+- [x] Copy states what OnDeck is in one sentence, names the six Departments in a supporting line, says no login is needed, and says to reach the media lead with questions.
+- [x] A single large primary action moves the Volunteer to Home.
+- [x] The screen appears only on a Volunteer's first visit. A flag in browser storage records that it has been seen.
+- [x] Home itself stays static and prerendered. Onboarding is overlaid on the client after the flag is read; Home is never made dynamic to accommodate it.
+- [x] Reading or writing the flag never throws, and the app renders correctly when storage is unavailable or empty — a private window, cleared site data, a different browser. In that case the Volunteer simply sees onboarding again.
+- [x] Copy is Brazilian Portuguese and never addresses the Volunteer by name: there are no accounts and no identity in the app.

@@ -6,6 +6,12 @@ difference is a mistake. Three differences are deliberate.
 
 ## Theme follows the system preference, not the clock
 
+**Updated:** a manual toggle was added after this was first written. The
+reasoning below stands and the default is unchanged — following the system is
+still what a Volunteer gets until they say otherwise. What changed is that
+"follow the system" became one of three states rather than the only one. See
+the closing note.
+
 The design system states that the app "alterna tema claro/escuro automaticamente
 pelo horário". We follow `prefers-color-scheme` instead.
 
@@ -20,11 +26,23 @@ service. `prefers-color-scheme` delivers that for free, because a person using
 their phone at night usually already has the system in dark. It costs no
 JavaScript, cannot mismatch, and respects an explicit preference.
 
-The token values are unchanged. Only the selector moved, from
-`[data-theme="light"]` to a `prefers-color-scheme: light` media query.
+The token values are unchanged. Only how the light theme is reached changed —
+see the note below for where that landed.
 
-**Revisit if** Volunteers ask for a manual toggle. One layers on top of this
-without rework; it would not have layered on top of clock-based switching.
+**This happened.** The toggle is a segmented control with three buttons —
+automatic, light, dark — so every state is visible and one tap away. Automatic
+is the default. A blocking script in the document head resolves the stored
+preference, automatic included, to a concrete `data-theme="light"` or `"dark"`
+on the root before first paint, keeps it in step if the system changes while
+the page is open, and sets the browser's theme-color to match. An explicit
+choice therefore wins over the system in both directions, and the stylesheet
+writes each theme exactly once, under one selector — automatic never reaches
+CSS at all. Without JavaScript the root carries no attribute and the dark
+defaults apply.
+
+It layered on without rework, exactly as predicted — the token values did not
+change, only the selectors that reach them. It would not have layered on top of
+clock-based switching, which had no notion of an explicit choice to respect.
 
 ## No progress persistence
 
