@@ -18,15 +18,15 @@ Home screen. UI: "departamento".
 _Avoid_: area, ministry, sector, role
 
 **Step**:
-A single executable action within a Department, with a required title and optional
-detail, Tool and warning. It is the smallest unit of the guide. A Department's Steps
+A single executable action within a Department, with a required title and detail and
+an optional Tool. It is the smallest unit of the guide. A Department's Steps
 form one ordered sequence, in the order they happen. UI: "passo".
 _Avoid_: instruction, item, task
 
 **Phase**:
 The moment a Step belongs to — before the service, during it, closing, or during the
-week. It is a label on each Step, not a container holding them: the Volunteer filters
-Steps by Phase, and "all" shows the whole sequence. Identifiers are English
+week. It is a label on each Step, not a container holding them; List mode groups
+the Runbook under one heading per Phase, in the order the moments happen. Identifiers are English
 (`before`, `service`, `closing`, `week`); the labels rendered to Volunteers are
 Portuguese ("Antes do culto", "Durante", "Encerramento", "Durante a semana").
 _Avoid_: section, stage, block
@@ -57,7 +57,8 @@ _Avoid_: admin, editor
 ### Reading
 
 **List mode**:
-The reference reading: the whole Runbook on one page, filtered by Phase. Serves
+The reference reading: the whole Runbook on one page, as Step titles grouped by
+Phase. Serves
 someone looking for a specific Step.
 _Avoid_: overview, reading mode
 
@@ -70,7 +71,7 @@ _Avoid_: wizard, guided mode, walkthrough
 
 **Tint**:
 The flat accent color identifying a Department (lilac, citron, coral, sky, mint,
-cream). It fills the Department's card on Home and the opening block of its page.
+rose, cream). No two Departments share one. It fills the Department's card on Home and the opening block of its page.
 _Avoid_: department color, theme, accent
 
 **Motif**:

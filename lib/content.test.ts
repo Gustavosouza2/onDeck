@@ -12,15 +12,6 @@ import {
   parseDepartments,
 } from "./content";
 
-/**
- * The content module is this app's only test seam. Everything that can
- * genuinely break lives here: schema validation and the cross-department
- * invariants TypeScript cannot check. Screens are presentation over tokens and
- * routes are covered by the build's slug enumeration, so neither is tested.
- *
- * These assert behaviour at the module boundary, never internal structure.
- */
-
 const aStep = {
   title: "Ligar o projetor",
   detail: "Ligue primeiro o projetor, depois o computador.",
@@ -139,6 +130,12 @@ describe("rejecting malformed content", () => {
     expect(() => parseDepartments([aDepartment, aDepartment])).toThrow(/slug/i);
   });
 
+  it("rejects two Departments sharing a Tint", () => {
+    const other = { ...aDepartment, slug: "transmissao", motif: "transmissao" };
+
+    expect(() => parseDepartments([aDepartment, other])).toThrow(/tint/i);
+  });
+
   it("accepts a well-formed set of Departments", () => {
     expect(() => parseDepartments([aDepartment])).not.toThrow();
   });
@@ -171,5 +168,13 @@ describe("content and assets agree", () => {
     for (const phase of used) {
       expect(PHASES).toContain(phase);
     }
+  });
+});
+
+describe("rejecting an unknown icon", () => {
+  it("rejects a Department whose icon is not one the app can render", () => {
+    const result = departmentSchema.safeParse({ ...aDepartment, icon: "monitor_play" });
+
+    expect(result.success).toBe(false);
   });
 });

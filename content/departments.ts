@@ -1,22 +1,3 @@
-/**
- * OnDeck content — the six Departments and their Runbooks.
- *
- * Edited by hand by the Maintainer. Validated by the schema in lib/content.ts,
- * so a malformed Runbook fails the build rather than reaching a Volunteer.
- *
- * Register: talk to the Volunteer as a teammate, not a manual. Second person,
- * friendly imperative, one action per Step, two or three sentences of detail at
- * most. Sentence case everywhere. No emoji. Tool names always exact.
- *
- * NEVER put a credential, password, login, token or personal phone number in
- * here. The app is public with only a no-index instruction, and internal links
- * leak. Where a Step needs a credential, say where to get it.
- *
- * SEED CONTENT — carried over from the design project, which marks it as
- * example copy pending review by the church's team. It has not been validated
- * against this church's actual equipment. See ticket 13.
- */
-
 const SEEDED = "2026-09-15";
 
 export const departments = [
@@ -306,7 +287,7 @@ export const departments = [
     toolNote: "Computador da edição · projeto “Reels Semana”",
     intro:
       "Da gravação do domingo saem os cortes da semana. O trabalho começa no domingo à noite e vai até quinta. Escolha momentos que fazem sentido sozinhos, sem contexto.",
-    tint: "mint",
+    tint: "rose",
     motif: "videos",
     icon: "film",
     updatedAt: SEEDED,
