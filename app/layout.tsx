@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+
+import { THEME_SCRIPT } from "@/lib/theme-script";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -22,14 +24,20 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "OnDeck",
-  description: "Guia da equipe de mídia: o passo a passo de cada área do culto.",
+  description:
+    "Guia da equipe de mídia: o passo a passo de cada departamento do culto.",
+  applicationName: "OnDeck",
+  appleWebApp: {
+    capable: true,
+    title: "OnDeck",
+    statusBarStyle: "black-translucent",
+  },
+  icons: { apple: "/icons/apple-icon.png" },
+  robots: { index: false, follow: false, nocache: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#151515" },
-    { media: "(prefers-color-scheme: light)", color: "#f3f1ee" },
-  ],
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -37,7 +45,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="pt-BR"
       className={`${spaceGrotesk.variable} ${dmSans.variable} ${jetBrainsMono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>{children}</body>
     </html>
   );
