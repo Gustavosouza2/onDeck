@@ -71,7 +71,6 @@ npm run dev      # http://localhost:3000
 | `npm test` | Run all tests once |
 | `npm run test:watch` | Tests in watch mode |
 | `npm run lint` | ESLint |
-| `npm run icons` | Regenerate the PWA icons from their source mark |
 
 > **If tests fail with "Cannot find native binding"** after adding a dependency, npm has dropped an optional native package ([npm/cli#4828](https://github.com/npm/cli/issues/4828)). Reinstall cleanly: `rm -rf node_modules package-lock.json && npm install`.
 
