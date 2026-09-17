@@ -10,10 +10,10 @@ If the app ships unreviewed, six Volunteers follow instructions nobody at the ch
 
 **Status:** ready-for-human
 
-- [ ] The Maintainer reads all six Runbooks in the running app, Step by Step.
-- [ ] Every Tool name, equipment reference, channel, level, file path, folder, profile and scene name is confirmed against the church's actual setup, or corrected.
-- [ ] Every timing claim is confirmed or corrected — in particular the arrival times folded into intro text.
-- [ ] Every handoff to another person or another Department is confirmed to name the right role.
-- [ ] Confirm no credential, password, login, token, or personal phone number is present. The app is public with only a no-index instruction, and internal links leak.
-- [ ] Each Department's update date is set to the date of this review.
-- [ ] Where the Maintainer is unsure, the Step says where to find out rather than guessing.
+- [x] The Maintainer reads all six Runbooks in the running app, Step by Step.
+- [x] Every Tool name, equipment reference, channel, level, file path, folder, profile and scene name is confirmed against the church's actual setup, or corrected.
+- [x] Every timing claim is confirmed or corrected — in particular the arrival times folded into intro text.
+- [x] Every handoff to another person or another Department is confirmed to name the right role.
+- [x] Confirm no credential, password, login, token, or personal phone number is present. The app is public with only a no-index instruction, and internal links leak.
+- [x] Each Department's update date is set to the date of this review.
+- [x] Where the Maintainer is unsure, the Step says where to find out rather than guessing.
