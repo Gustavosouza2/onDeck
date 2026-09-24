@@ -32,9 +32,9 @@ export default async function DepartmentPage({
   if (!department) notFound();
 
   return (
-    <>
+    <div data-tint={department.tint} className="contents">
       <AppBar title={department.name} subtitle={department.tool} backHref="/" />
       <DepartmentView department={department} />
-    </>
+    </div>
   );
 }

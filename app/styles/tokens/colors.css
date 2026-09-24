@@ -40,6 +40,10 @@
   /* Added so each Department carries its own Tint. Same register as mint and
      sky: light enough for ink text and for the ink Motifs to read over it. */
   --rose-300: #f3b9ce;
+  /* Pressed steps for the Tints that had no ramp below their base. They exist
+     only so every Tint can drive --accent-press once it becomes the page
+     accent; see the [data-tint] block at the end of this file. */
+  --mint-500: #7fcda8; --sky-500: #7bb2e0; --rose-500: #e08bab; --cream-400: #ddd5c3;
   --ink: #151515; /* text on any accent fill */
 
   /* Near-black neutrals */
@@ -98,3 +102,19 @@
 
   color-scheme: light;
 }
+
+/* ---------------------------------------------------------------------------
+ * Tinted pages. A Department page paints itself in its own Tint: setting
+ * --accent here retints every control that reads it — the "Seguir passo a
+ * passo" Button, the Tool Tag on a Step, the Theme toggle's thumb and every
+ * focus ring — without any of those components knowing which Department they
+ * are on. Applied as data-tint by app/departamentos/[slug]/page.tsx.
+ * Both themes share these, exactly as the base --accent does.
+ * ------------------------------------------------------------------------ */
+[data-tint="lilac"] { --accent: var(--lilac-300); --accent-press: var(--lilac-500); }
+[data-tint="citron"] { --accent: var(--citron-400); --accent-press: var(--citron-500); }
+[data-tint="coral"] { --accent: var(--coral-400); --accent-press: var(--coral-500); }
+[data-tint="mint"] { --accent: var(--mint-300); --accent-press: var(--mint-500); }
+[data-tint="sky"] { --accent: var(--sky-300); --accent-press: var(--sky-500); }
+[data-tint="rose"] { --accent: var(--rose-300); --accent-press: var(--rose-500); }
+[data-tint="cream"] { --accent: var(--cream-200); --accent-press: var(--cream-400); }
