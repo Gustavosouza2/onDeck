@@ -7,11 +7,9 @@ import { FocusMode } from "@/components/content/FocusMode";
 import { PhaseGroup } from "@/components/content/PhaseGroup";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { TINT_CLASS } from "@/components/ui/tint";
 import { TintMorph } from "@/components/ui/TintMorph";
 import type { Department } from "@/lib/content";
-import { formatUpdatedAt } from "@/lib/format";
 import { useMotionTiming } from "@/lib/motion";
 import { clampPosition, groupByPhase, numberSteps } from "@/lib/runbook";
 
@@ -123,29 +121,16 @@ export function DepartmentView({ department }: { department: Department }) {
           >
             Seguir passo a passo no culto
           </Button>
-
-          <section>
-            <SectionHeader
-              label="Passo a passo"
-              meta={`Atualizado em ${formatUpdatedAt(department.updatedAt)}`}
-            />
-
-            <div className="grid gap-(--space-7)">
-              {groups.map((group) => (
-                <PhaseGroup
-                  key={group.phase}
-                  phase={group.phase}
-                  steps={group.steps}
-                  showLabel={showPhaseLabels}
-                />
-              ))}
-            </div>
-          </section>
-
-          <p className="border-t border-(--border-subtle) pt-(--space-5) text-(length:--text-sm) leading-relaxed text-(--color-faint)">
-            Travou em algum passo? Chame o líder da mídia no grupo antes de
-            improvisar.
-          </p>
+          <div className="grid gap-(--space-7)">
+            {groups.map((group) => (
+              <PhaseGroup
+                key={group.phase}
+                phase={group.phase}
+                steps={group.steps}
+                showLabel={showPhaseLabels}
+              />
+            ))}
+          </div>
         </motion.main>
       )}
     </AnimatePresence>
