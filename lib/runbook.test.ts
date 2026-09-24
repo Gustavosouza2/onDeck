@@ -1,42 +1,43 @@
 import { describe, expect, it } from "vitest";
 
-import { getDepartment } from "./content";
+import { aRunbook, aSinglePhaseRunbook } from "@/test/fixtures";
+
 import { clampPosition, groupByPhase, numberSteps } from "./runbook";
 
-const transmissao = await getDepartment("transmissao");
-const banner = await getDepartment("banner");
+const runbook = aRunbook();
+const singlePhase = aSinglePhaseRunbook();
 
 describe("numbering Steps", () => {
   it("numbers from one, in Runbook order", () => {
-    expect(numberSteps(transmissao!).map((n) => n.index)).toEqual([
+    expect(numberSteps(runbook).map((n) => n.index)).toEqual([
       1, 2, 3, 4, 5, 6, 7, 8, 9,
     ]);
   });
 
   it("carries each Step alongside its number", () => {
-    const [first] = numberSteps(transmissao!);
+    const [first] = numberSteps(runbook);
 
     expect(first.index).toBe(1);
-    expect(first.step.title).toBe("Ligar o notebook e as câmeras");
+    expect(first.step).toBe(runbook.steps[0]);
   });
 });
 
 describe("grouping by Phase", () => {
   it("splits a Runbook into its Phases, in order", () => {
-    const groups = groupByPhase(numberSteps(transmissao!));
+    const groups = groupByPhase(numberSteps(runbook));
 
     expect(groups.map((g) => g.phase)).toEqual(["before", "service", "closing"]);
     expect(groups.map((g) => g.steps.length)).toEqual([5, 2, 2]);
   });
 
   it("keeps Step numbers running across groups", () => {
-    const groups = groupByPhase(numberSteps(transmissao!));
+    const groups = groupByPhase(numberSteps(runbook));
 
     expect(groups.at(-1)!.steps.map((s) => s.index)).toEqual([8, 9]);
   });
 
   it("returns a single group for a Runbook with one Phase", () => {
-    const groups = groupByPhase(numberSteps(banner!));
+    const groups = groupByPhase(numberSteps(singlePhase));
 
     expect(groups).toHaveLength(1);
     expect(groups[0].phase).toBe("week");

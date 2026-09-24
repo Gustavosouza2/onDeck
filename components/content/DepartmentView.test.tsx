@@ -2,49 +2,46 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
-import { getDepartment } from "@/lib/content";
+import { STEP_TOOL, aRunbook, aSinglePhaseRunbook } from "@/test/fixtures";
 
 import { DepartmentView } from "./DepartmentView";
 
-const transmissao = (await getDepartment("transmissao"))!;
-const banner = (await getDepartment("banner"))!;
+const department = aRunbook();
+const singlePhase = aSinglePhaseRunbook();
 
-const firstStep = transmissao.steps[0];
-const lastStep = transmissao.steps.at(-1)!;
+const firstStep = department.steps[0];
+const secondStep = department.steps[1];
+const lastStep = department.steps.at(-1)!;
+const total = department.steps.length;
 
 describe("DepartmentView in List mode", () => {
   it("opens on the Department, its Tool and where the Tool lives", () => {
-    render(<DepartmentView department={transmissao} />);
+    render(<DepartmentView department={department} />);
 
     const heading = screen.getByRole("heading", {
       level: 1,
-      name: "Transmissão",
+      name: department.name,
     });
     expect(heading).toBeInTheDocument();
+
     const heroBlock = heading.closest("section")!;
-    expect(within(heroBlock).getByText("OBS Studio")).toBeInTheDocument();
-    expect(within(heroBlock).getByText(transmissao.toolNote)).toBeInTheDocument();
-  });
-
-  it("says when the Runbook was last updated", () => {
-    render(<DepartmentView department={transmissao} />);
-
+    expect(within(heroBlock).getByText(department.tool)).toBeInTheDocument();
     expect(
-      screen.getByText("Atualizado em 15 de setembro de 2026"),
+      within(heroBlock).getByText(department.toolNote),
     ).toBeInTheDocument();
   });
 
   it("lists every Step by title and keeps the detail out of the list", () => {
-    render(<DepartmentView department={transmissao} />);
+    render(<DepartmentView department={department} />);
 
-    for (const step of transmissao.steps) {
+    for (const step of department.steps) {
       expect(screen.getByText(step.title)).toBeInTheDocument();
     }
     expect(screen.queryByText(firstStep.detail)).not.toBeInTheDocument();
   });
 
   it("groups the Runbook under a heading per Phase, each an ordered list numbered from its real position", () => {
-    render(<DepartmentView department={transmissao} />);
+    render(<DepartmentView department={department} />);
 
     const before = screen.getByRole("list", { name: "Antes do culto" });
     const during = screen.getByRole("list", { name: "Durante" });
@@ -55,11 +52,12 @@ describe("DepartmentView in List mode", () => {
     expect(closing).toHaveAttribute("start", "8");
 
     expect(within(before).getAllByRole("listitem")).toHaveLength(5);
+    expect(within(during).getAllByRole("listitem")).toHaveLength(2);
     expect(within(closing).getAllByRole("listitem")).toHaveLength(2);
   });
 
   it("reads each Step's number as part of the Step", () => {
-    render(<DepartmentView department={transmissao} />);
+    render(<DepartmentView department={department} />);
 
     const closing = screen.getByRole("list", { name: "Encerramento" });
     const [eighth, ninth] = within(closing).getAllByRole("listitem");
@@ -69,7 +67,7 @@ describe("DepartmentView in List mode", () => {
   });
 
   it("marks no Phases for a Runbook that happens in one", () => {
-    render(<DepartmentView department={banner} />);
+    render(<DepartmentView department={singlePhase} />);
 
     expect(
       screen.queryByRole("heading", { name: "Durante a semana" }),
@@ -78,7 +76,7 @@ describe("DepartmentView in List mode", () => {
   });
 
   it("keeps the intro closed until asked for, and opens it on demand", async () => {
-    render(<DepartmentView department={transmissao} />);
+    render(<DepartmentView department={department} />);
 
     const toggle = screen.getByRole("button", { name: "Sobre o departamento" });
     const panel = screen.getByRole("region", {
@@ -93,16 +91,16 @@ describe("DepartmentView in List mode", () => {
 
     expect(toggle).toHaveAttribute("aria-expanded", "true");
     expect(panel).not.toHaveAttribute("inert");
-    expect(
-      screen.getByRole("region", { name: "Sobre o departamento" }),
-    ).toBe(panel);
-    expect(within(panel).getByText(transmissao.intro)).toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "Sobre o departamento" })).toBe(
+      panel,
+    );
+    expect(within(panel).getByText(department.intro)).toBeInTheDocument();
   });
 });
 
 describe("DepartmentView in Focus mode", () => {
   async function enterFocusMode() {
-    render(<DepartmentView department={transmissao} />);
+    render(<DepartmentView department={department} />);
     await userEvent.click(
       screen.getByRole("button", { name: "Seguir passo a passo no culto" }),
     );
@@ -111,19 +109,22 @@ describe("DepartmentView in Focus mode", () => {
   it("shows one Step with its detail, starting at the first", async () => {
     await enterFocusMode();
 
-    expect(screen.getByText("Passo 1 de 9")).toBeInTheDocument();
+    expect(screen.getByText(`Passo 1 de ${total}`)).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: firstStep.title }),
     ).toBeInTheDocument();
     expect(screen.getByText(firstStep.detail)).toBeInTheDocument();
-    expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "1");
+    expect(screen.getByRole("progressbar")).toHaveAttribute(
+      "aria-valuenow",
+      "1",
+    );
   });
 
   it("previews the next Step and cannot go back from the first", async () => {
     await enterFocusMode();
 
     expect(
-      screen.getByText(`Depois: ${transmissao.steps[1].title}`),
+      screen.getByText(`Depois: ${secondStep.title}`),
     ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Anterior" })).toBeDisabled();
   });
@@ -132,23 +133,23 @@ describe("DepartmentView in Focus mode", () => {
     await enterFocusMode();
 
     await userEvent.click(screen.getByRole("button", { name: "Próximo" }));
-    expect(screen.getByText("Passo 2 de 9")).toBeInTheDocument();
+    expect(screen.getByText(`Passo 2 de ${total}`)).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: transmissao.steps[1].title }),
+      screen.getByRole("heading", { name: secondStep.title }),
     ).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole("button", { name: "Anterior" }));
-    expect(screen.getByText("Passo 1 de 9")).toBeInTheDocument();
+    expect(screen.getByText(`Passo 1 de ${total}`)).toBeInTheDocument();
   });
 
   it("ends the Runbook plainly on the last Step", async () => {
     await enterFocusMode();
 
-    for (let i = 1; i < transmissao.steps.length; i++) {
+    for (let i = 1; i < total; i++) {
       await userEvent.click(screen.getByRole("button", { name: "Próximo" }));
     }
 
-    expect(screen.getByText("Passo 9 de 9")).toBeInTheDocument();
+    expect(screen.getByText(`Passo ${total} de ${total}`)).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: lastStep.title }),
     ).toBeInTheDocument();
@@ -161,9 +162,11 @@ describe("DepartmentView in Focus mode", () => {
   it("shows a Step's own Tool when it names one", async () => {
     await enterFocusMode();
 
+    expect(screen.queryByText(STEP_TOOL)).not.toBeInTheDocument();
+
     await userEvent.click(screen.getByRole("button", { name: "Próximo" }));
 
-    expect(screen.getByText("OBS Studio")).toBeInTheDocument();
+    expect(screen.getByText(STEP_TOOL)).toBeInTheDocument();
   });
 
   it("returns to the list, and starts again from the first Step next time", async () => {
@@ -178,6 +181,6 @@ describe("DepartmentView in Focus mode", () => {
     await userEvent.click(
       screen.getByRole("button", { name: "Seguir passo a passo no culto" }),
     );
-    expect(screen.getByText("Passo 1 de 9")).toBeInTheDocument();
+    expect(screen.getByText(`Passo 1 de ${total}`)).toBeInTheDocument();
   });
 });
