@@ -1,11 +1,34 @@
 const SEEDED = "2026-09-15";
 
-export const departments = [
+type StepPhase = "before" | "service" | "closing" | "week";
+
+type Step = {
+  phase: StepPhase;
+  detail?: string;
+  title: string;
+  tool?: string;
+}
+
+type Departments = {
+  updatedAt: string;
+  toolNote: string;
+  summary: string;
+  intro: string;
+  motif: string;
+  steps: Step[];
+  slug: string;
+  name: string;
+  tool: string;
+  tint: string;
+  icon: string;
+}
+
+export const departments: Departments[] = [
   {
     slug: "projecao",
     name: "Projeção",
     summary: "Letras e avisos na tela do templo",
-    tool: "OpenLP",
+    tool: "Holyrics",
     toolNote: "Computador da projeção · serviço “Domingo” já salvo",
     intro:
       "Você controla o que a igreja vê na tela: letras dos louvores, versículos e avisos. Chegue uns 40 minutos antes para ligar tudo com calma. O segredo é acompanhar a banda e o pregador sem atrasar o slide.",
@@ -17,31 +40,31 @@ export const departments = [
       {
         title: "Ligar o computador e o projetor",
         detail:
-          "Ligue primeiro o projetor, depois o computador. Confirme que a saída está em HDMI 2.",
+          "Ligue primeiro o projetor/luzes centrais no dijuntor, vai estar escrito Projetor e Luzes,  depois o computador. Confirme se o projetor realmente foi ligado",
         phase: "before",
       },
       {
-        title: "Abrir o OpenLP no serviço do domingo",
+        title: "Abrir o Holyrics no serviço do domingo",
         detail:
-          "O arquivo do culto fica na área de trabalho, na pasta Culto. Abra o do domingo atual.",
+          "O programa Holyrics fica localizado na aréa de trabalho, se não estiver, procure na barra de pesquisa do Windows.",
         phase: "before",
-        tool: "OpenLP",
+        tool: "Holyrics",
       },
       {
-        title: "Conferir a ordem dos louvores",
+        title: "Escreva a lista de louvores e conferir a ordem",
         detail:
           "Compare com a lista que o líder de louvor enviou no grupo. Se faltar alguma música, avise antes do ensaio acabar.",
         phase: "before",
       },
       {
-        title: "Testar a tela dupla",
+        title: "Testar a TV de retorno",
         detail:
-          "Projete um slide de teste. A tela do operador mostra a prévia; a do templo, o slide atual.",
+          "Projete um slide de teste. A TV de retorno mostra a prévia da letra; a do projetor, o slide atual.",
         phase: "before",
       },
       {
-        title: "Subir o slide de boas-vindas",
-        detail: "Deixe o slide de abertura no ar enquanto o povo entra.",
+        title: "Cor do tema de fundo",
+        detail: "Analise a cor da roupa da dança e altere o tema do fundo de acordo com a cor. Para fazer isso, verifique a lista de temas na direta e escolha um tema que combine com a cor da roupa.",
         phase: "before",
       },
       {
@@ -51,15 +74,21 @@ export const departments = [
         phase: "service",
       },
       {
+        title: "Anúncios",
+        detail:
+          "Na aba de imagens no holyrics, selecione os anúncios de acordo com a ordem de quem vai falar.",
+        phase: "service",
+      },
+      {
         title: "Projetar os versículos da pregação",
         detail:
           "O pregador avisa a referência. Digite no campo de busca bíblica e projete.",
         phase: "service",
       },
       {
-        title: "Avisos e encerramento",
+        title: "Finalizar o culto e desligar tudo",
         detail:
-          "Suba os slides de avisos, apague a tela e desligue o projetor antes do computador.",
+          "Depois que finalizar, desligue o computador, e a chave no dijuntor do projetor e das luzes centrais.",
         phase: "closing",
       },
     ],
@@ -78,56 +107,62 @@ export const departments = [
     updatedAt: SEEDED,
     steps: [
       {
-        title: "Ligar o notebook e as câmeras",
+        title: "Ligar o computador",
         detail:
-          "Conecte a captura USB antes de abrir o OBS, senão as cenas ficam sem sinal.",
+          "Ligue o computador da transmissão",
         phase: "before",
       },
       {
-        title: "Abrir o OBS no perfil “Culto”",
+        title: "Abrir o OBS",
         detail:
-          "Perfil Culto, coleção de cenas Domingo. Confirme as três cenas: Palco, Pregação e Avisos.",
+          "Abra o OBS studio localizado na área de trabalho, se não estiver, procure na barra de pesquisa do Windows.",
         phase: "before",
         tool: "OBS Studio",
       },
       {
-        title: "Checar o áudio da mesa",
+        title: "Celular da transmissão",
         detail:
-          "Peça um teste ao operador de som. O canal 3 é a saída da mesa; o pico deve ficar em torno de -12 dB.",
+          "Pegue o celular da transmissão na gaveta escrita Celular/Cabos, abra o aplicativo escrito Irium Webcam.",
         phase: "before",
       },
       {
-        title: "Criar a transmissão no YouTube",
+        title: "Conectar Irium Webcam no OBS",
         detail:
-          "Título com data do culto, visibilidade pública, miniatura da semana. As credenciais da conta ficam com o líder da mídia.",
+          "Apenas abra o aplicativo Irium webcam no computador da transmissão, e verifique se o que esta sendo transmitido no celular, esta aparecendo no computador da transmissão.",
         phase: "before",
       },
       {
-        title: "Iniciar a live e conferir o delay",
-        detail: "Abra a live em outro aparelho para confirmar imagem e som.",
+        title: "Posicionamento da câmera",
+        detail: "Caminhe até o suporte da camera localizado na parede e encaixe o celular no suporte, depois, volte até o computador e verifique se esta posiconado corretamente, caso não esteja, ajuste a posição da câmera.",
         phase: "before",
       },
       {
-        title: "Trocar de cena conforme o momento",
+        title: "Áudio transmissão",
         detail:
-          "Palco no louvor, Pregação quando o pregador subir, Avisos no encerramento.",
+          "Conecte um fone no aparelho de áudio na parte de out e verifique se o som da live esta bom",
+        phase: "before",
+      },
+      {
+        title: "Gerenciar transmissão",
+        detail: "Clique em gerenciar transmissão, depois altere o titulo para o culto do dia, e altere a tumbnail para a imagem correta, por exemplo, se for culto de Santa Ceia, escreva Santa Ceia e a Data, depois altere a imagem para a imagem correta, que esta localizada na pasta de imagens do computador da transmissão.",
+        phase: "before",
+      },
+      {
+        title: "Iniciar transmissão",
+        detail:
+          "Quando faltar 5 minutos para o inicio do culto, clique em inciar transmissão, e verifique se a transmissão esta funcionando corretamente. Depois disso, entre no youtube pelo seu celular e mande o link da transmissão para o grupo da igreja.",
         phase: "service",
       },
       {
-        title: "Acompanhar o chat",
-        detail: "Responda saudações e some o pedido de oração ao grupo da equipe.",
+        title: "Passar para cena",
+        detail:
+          "Depois que a contagem regressiva terminar, selecione a camera principal no OBS, e clique em esmaecer para passar a camera para o ao vivo.",
         phase: "service",
       },
       {
-        title: "Encerrar a transmissão",
+        title: "Finalizar transmissão",
         detail:
-          "Espere a bênção final, suba a cena de encerramento por 30 segundos e finalize.",
-        phase: "closing",
-      },
-      {
-        title: "Salvar a gravação",
-        detail:
-          "Copie o arquivo local para o HD da mídia e avise a equipe de vídeos.",
+          "Assim que o pastor der a benção final, clique em esmaecer para passar a imagem Culto Online, e depois encerre a transmissão, e desligue o computador da transmissão.",
         phase: "closing",
       },
     ],
@@ -136,7 +171,7 @@ export const departments = [
     slug: "fotos",
     name: "Fotos e Stories",
     summary: "Registro do culto em foto e story",
-    tool: "Lightroom Mobile",
+    tool: "Capcut",
     toolNote: "Celular da mídia · preset “Culto” já instalado",
     intro:
       "Fotos contam a história do culto. Pegue o celular da mídia uns 20 minutos antes. Busque rostos, mãos levantadas e detalhes — e poste os stories ainda durante o culto.",
@@ -186,47 +221,31 @@ export const departments = [
     slug: "camera2",
     name: "Câmera Secundária",
     summary: "Segundo ângulo para a transmissão",
-    tool: "Câmera Sony + tripé",
-    toolNote: "Tripé da lateral direita · cabo HDMI 10 m até a mesa",
+    tool: "Irium Webcam",
+    toolNote: "Baixar aplicativo Irium Webcam no celular (Android ou IOS)",
     intro:
-      "Você dá o segundo ponto de vista da live. Chegue uns 40 minutos antes para montar o tripé sem pressa. Movimento lento, enquadramento estável: a imagem entra no ar sem aviso.",
+      "Você dá o segundo ponto de vista da live. Movimento lento, enquadramento estável: a imagem entra no ar com aviso do operador do OBS.",
     tint: "sky",
     motif: "camera2",
     icon: "video",
     updatedAt: SEEDED,
     steps: [
       {
-        title: "Montar o tripé na lateral direita",
+        title: "Baixar Irium Webcam",
         detail:
-          "Marque as pernas com a fita no chão para não atrapalhar a passagem.",
+          "Depois de baixar o aplicativo, certifique-se de que esta conectado na mesma rede Wi-Fi do computador da transmissão, pois só assim o Irium funcionará corretamente.",
         phase: "before",
       },
       {
-        title: "Conectar HDMI e energia",
+        title: "Transmitir Segunda Câmera",
         detail:
-          "Passe o cabo pela borda da parede e prenda com fita. Nunca no meio do corredor.",
-        phase: "before",
-      },
-      {
-        title: "Confirmar sinal com a transmissão",
-        detail: "Peça ao operador do OBS para checar a cena Câmera 2.",
-        phase: "before",
-      },
-      {
-        title: "Ajustar foco e enquadramento",
-        detail: "Enquadre o púlpito com folga em cima. Foco manual, travado.",
-        phase: "before",
-      },
-      {
-        title: "Seguir o pregador com movimento lento",
-        detail: "Só panorâmica suave. Nada de zoom durante a fala.",
+          "Abra o app, e pergunte para o operador do OBS se a segunda câmera esta aparecendo no computador da transmissão.",
         phase: "service",
       },
       {
-        title: "Desmontar e guardar",
-        detail:
-          "Bateria no carregador, cabo enrolado em oito, tripé no armário da mídia.",
-        phase: "closing",
+        title: "Ajustar foco e enquadramento",
+        detail: "Enquadre corretamente. Ajuste o foco, sempre se comunique com o operador do OBS para que ele avise se a imagem esta boa ou não.",
+        phase: "service",
       },
     ],
   },
@@ -250,26 +269,32 @@ export const departments = [
         phase: "week",
       },
       {
-        title: "Abrir o template da categoria",
+        title: "Pesquisar inspirações",
         detail:
-          "Aviso, série ou evento — cada um tem seu template na pasta da igreja.",
+          "Pesquise no behance, dribbble e pinterest inspirações para o design, pesquise por nomes como Church Design, Church Poster, Church Banner, Church Flyer, Church Social Media, Church Branding.",
         phase: "week",
         tool: "Canva",
       },
       {
-        title: "Aplicar o texto sem mudar a fonte",
+        title: "Iniciar o design",
         detail:
-          "Se o texto não couber, reduza a quantidade de palavras, não o tamanho da fonte.",
+          "Abra o Canva, escolha o template correto e aplique a identidade da igreja. Não invente cores, fontes ou elementos.",
         phase: "week",
       },
       {
-        title: "Exportar nos três formatos",
-        detail: "Feed 1080×1080, story 1080×1920 e projeção 1920×1080.",
+        title: "Aplicar identidade da igreja",
+        detail:
+          "Aplique a paleta de cores, fontes e elementos da identidade visual da igreja. E crie um design que faça sentido com o pedido, e que seja legível e atraente.",
+        phase: "week",
+      },
+      {
+        title: "Exportar em dois formatos",
+        detail: "Story 1080×1920 e projeção 1920×1080.",
         phase: "week",
       },
       {
         title: "Enviar para aprovação",
-        detail: "Poste no grupo da mídia e aguarde o OK do líder antes de publicar.",
+        detail: "Poste no grupo da mídia e aguarde o OK do líder antes de tudo.",
         phase: "week",
       },
       {
@@ -283,7 +308,7 @@ export const departments = [
     slug: "videos",
     name: "Vídeos",
     summary: "Cortes e reels da semana",
-    tool: "Premiere Pro",
+    tool: "Capcut",
     toolNote: "Computador da edição · projeto “Reels Semana”",
     intro:
       "Da gravação do domingo saem os cortes da semana. O trabalho começa no domingo à noite e vai até quinta. Escolha momentos que fazem sentido sozinhos, sem contexto.",
@@ -307,7 +332,7 @@ export const departments = [
         title: "Montar os cortes no projeto da semana",
         detail: "Formato vertical 1080×1920, legenda sempre ligada.",
         phase: "week",
-        tool: "Premiere Pro",
+        tool: "Capcut",
       },
       {
         title: "Conferir áudio e legenda",
