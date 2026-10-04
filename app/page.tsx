@@ -1,7 +1,6 @@
 import { OnboardingGate } from "@/components/content/OnboardingGate";
 import { DepartmentCard } from "@/components/content/DepartmentCard";
 import { InstallPrompt } from "@/components/content/InstallPrompt";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { getDepartments } from "@/lib/content";
 
@@ -16,7 +15,6 @@ export default async function Home() {
           <h1 className="mt-(--space-3) font-display text-(length:--text-display) leading-tight font-bold tracking-tight lg:text-(length:--text-hero)">
             E aí, pronto pro culto?
           </h1>
-          <ThemeToggle className="mt-(--space-5)" />
         </header>
 
         <div className="grid grid-cols-1 gap-(--gap-card) md:grid-cols-2 md:gap-(--space-5) lg:grid-cols-3">

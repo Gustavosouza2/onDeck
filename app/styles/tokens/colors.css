@@ -2,13 +2,9 @@
  *
  * Ported from the design system. Values are unchanged; three things were adapted:
  *
- * 1. The design system switches theme by clock time. OnDeck follows the system
- *    preference by default and lets a Volunteer override it (see docs/adr/0001).
- *    The document root always carries a concrete data-theme="light" or "dark":
- *    the head script (lib/theme-script.ts) resolves "automatic" against the
- *    system before first paint and keeps it in step afterwards. So each theme
- *    is written exactly once here, under one selector, and nothing else in the
- *    stylesheet needs to know that "automatic" exists.
+ * 1. The design system switches theme by clock time. OnDeck has one theme,
+ *    dark, and no switch at all (see docs/adr/0004). So there is a single set
+ *    of semantic aliases below and no selector anywhere keyed to a theme.
  *
  * 2. Semantic text colors are renamed --text-* -> --color-* so they live in
  *    Tailwind's color namespace and no longer collide with the type scale.
@@ -20,9 +16,6 @@
  *    alias, icon-active). The primitive ramps below are kept
  *    whole: they are the design system's scale, and deleting the unused steps
  *    would leave holes in it rather than remove a feature.
- *
- * Without JavaScript the root carries no attribute and the dark defaults on
- * :root apply — dark is the design system's first theme.
  */
 :root {
   /* Brand accents — lilac primary, citron secondary, coral tertiary.
@@ -52,7 +45,7 @@
   --gray-700: #a3a3a3; --gray-800: #c9c9c9; --gray-900: #e8e8e8; --gray-950: #ffffff;
   --white: #ffffff;
 
-  /* Semantic aliases — DARK. Keep --bg-app in step with GROUND in lib/brand.ts;
+  /* Semantic aliases. Keep --bg-app in step with GROUND in lib/brand.ts;
      lib/brand.test.ts fails if they drift. */
   --bg-app: var(--gray-050);
   --surface-card: var(--gray-100);
@@ -82,34 +75,12 @@
   color-scheme: dark;
 }
 
-/* LIGHT — same accents, paper ground. The only light block in the stylesheet. */
-:root[data-theme="light"] {
-  --bg-app: #f3f1ee;
-  --surface-card: var(--white);
-  --surface-input: #eeece8;
-  --surface-accent-soft: rgba(135, 99, 199, 0.14);
-
-  --border-subtle: rgba(21, 21, 21, 0.07);
-  --border-default: #ddd9d3;
-  --border-strong: #c3bfb8;
-
-  --color-title: var(--ink);
-  --color-body: #232323;
-  --color-muted: #5e5e5e;
-  --color-faint: #8a8a8a;
-
-  --icon-default: var(--ink);
-
-  color-scheme: light;
-}
-
 /* ---------------------------------------------------------------------------
  * Tinted pages. A Department page paints itself in its own Tint: setting
  * --accent here retints every control that reads it — the "Seguir passo a
- * passo" Button, the Tool Tag on a Step, the Theme toggle's thumb and every
- * focus ring — without any of those components knowing which Department they
- * are on. Applied as data-tint by app/departamentos/[slug]/page.tsx.
- * Both themes share these, exactly as the base --accent does.
+ * passo" Button, the Tool Tag on a Step, Focus mode's progress and every focus
+ * ring — without any of those components knowing which Department they are on.
+ * Applied as data-tint by app/departamentos/[slug]/page.tsx.
  * ------------------------------------------------------------------------ */
 [data-tint="lilac"] { --accent: var(--lilac-300); --accent-press: var(--lilac-500); }
 [data-tint="citron"] { --accent: var(--citron-400); --accent-press: var(--citron-500); }

@@ -14,9 +14,10 @@ describe("AppBar", () => {
     ).toHaveAttribute("href", "/");
   });
 
-  it("carries the theme control", () => {
+  it("leaves out the subtitle line when there is no Tool to name", () => {
     render(<AppBar title="Transmissão" backHref="/" />);
 
-    expect(screen.getByRole("group", { name: "Tema" })).toBeInTheDocument();
+    expect(screen.getByText("Transmissão")).toBeInTheDocument();
+    expect(screen.queryByText("OBS Studio")).not.toBeInTheDocument();
   });
 });

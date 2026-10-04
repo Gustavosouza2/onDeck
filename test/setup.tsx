@@ -57,8 +57,6 @@ vi.mock("@/components/ui/TintMorph", () => ({
 
 beforeEach(() => {
   window.localStorage.clear();
-  document.documentElement.removeAttribute("data-theme");
-  document.head.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.remove());
   resetMedia();
 });
 

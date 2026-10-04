@@ -6,11 +6,11 @@ difference is a mistake. Three differences are deliberate.
 
 ## Theme follows the system preference, not the clock
 
-**Updated:** a manual toggle was added after this was first written. The
-reasoning below stands and the default is unchanged — following the system is
-still what a Volunteer gets until they say otherwise. What changed is that
-"follow the system" became one of three states rather than the only one. See
-the closing note.
+**Superseded by [ADR 0004](0004-one-theme-dark.md).** OnDeck now has one theme,
+dark, and no switch of any kind. Everything below is the history of how it got
+there — first following `prefers-color-scheme` instead of the clock, then
+adding a three-state toggle on top — and none of it describes the code any
+more. ADR 0004 says why it all came out.
 
 The design system states that the app "alterna tema claro/escuro automaticamente
 pelo horário". We follow `prefers-color-scheme` instead.

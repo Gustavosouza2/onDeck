@@ -22,18 +22,12 @@ function tokenValue(css: string, name: string): string {
 }
 
 describe("the ground colour outside CSS", () => {
-  it("matches the dark --bg-app", () => {
+  it("matches --bg-app", () => {
     const root = block(":root");
     const reference = tokenValue(root, "--bg-app"); // var(--gray-050)
     const primitive = reference.match(/var\((--[a-z0-9-]+)\)/)?.[1];
 
     expect(primitive).toBeDefined();
-    expect(tokenValue(root, primitive!)).toBe(GROUND.dark);
-  });
-
-  it("matches the light --bg-app", () => {
-    expect(tokenValue(block(':root[data-theme="light"]'), "--bg-app")).toBe(
-      GROUND.light,
-    );
+    expect(tokenValue(root, primitive!)).toBe(GROUND);
   });
 });

@@ -20,10 +20,10 @@ It exists for two moments: **someone new joins the team**, and **someone has to 
 > The app's interface is in Brazilian Portuguese. The codebase and documentation are in English.
 
 <p align="center">
-  <img src="docs/readme/screens-mobile.png" alt="Four phone screens: Home with department cards; a department's step-by-step list grouped by phase; Focus mode showing one step with its detail; the same list in the light theme." width="100%">
+  <img src="docs/readme/screens-mobile.png" alt="Three phone screens: Home with department cards; a department's step-by-step list grouped by phase, tinted in that department's colour; Focus mode showing one step with its detail." width="100%">
 </p>
 
-<p align="center"><sub>Home · List mode · Focus mode · Light theme</sub></p>
+<p align="center"><sub>Home · List mode · Focus mode</sub></p>
 
 ## Features
 
@@ -32,7 +32,8 @@ It exists for two moments: **someone new joins the team**, and **someone has to 
   - **List mode** — every step as a title, grouped under *Antes do culto*, *Durante* and *Encerramento*, for finding "which step was it?" fast.
   - **Focus mode** — one step per screen with its full detail, large type and controls docked where a thumb already is, for doing the work live.
 - **Nothing to set up.** No accounts, no login, no personal data. Nothing about a volunteer's progress is stored.
-- **Light, dark or automatic.** Follows the phone by default; a manual choice sticks and is applied before the first paint, so there is no flash.
+- **One appearance, dark.** Composed for a dim sanctuary and rendered statically, so there is no switch to find and nothing to flash ([ADR 0004](docs/adr/0004-one-theme-dark.md)).
+- **The colour follows you in.** Open the yellow card and the whole page turns yellow — button, tool badges and progress — so the thread from Home to the runbook never breaks.
 - **Installable.** Add it to the home screen on Android and iOS; Home offers to install and explains the Share gesture on iPhone.
 - **Accessible.** Real ordered lists that keep step numbers for screen readers, a proper dialog on first visit, and reduced motion respected everywhere.
 
@@ -93,14 +94,13 @@ app/                    Routes, layout, manifest, robots and design tokens
   styles/tokens/          The design system as CSS custom properties
 components/
   content/              Screens and domain components (cards, runbook, focus mode…)
-  ui/                   Design-system primitives (Button, Icon, ThemeToggle…)
+  ui/                   Design-system primitives (Button, Icon, AppBar…)
 content/                The six departments and their runbooks
-lib/                    Logic kept out of components: content, runbook, theme, install
+lib/                    Logic kept out of components: content, runbook, install
 test/                   Shared test setup
 docs/
   adr/                  Architecture decision records
   readme/               Images used in this file
-scripts/                Icon generator
 ```
 
 ## Testing
@@ -119,6 +119,7 @@ The reasoning behind the less obvious choices is written down:
 - [ADR 0001](docs/adr/0001-deliberate-divergences-from-the-design-system.md) — where the app deliberately differs from the design system, and why
 - [ADR 0002](docs/adr/0002-installable-pwa-without-a-service-worker.md) — why it installs but does not work offline
 - [ADR 0003](docs/adr/0003-shadcn-ui-deferred.md) — why the components are hand-written rather than generated with shadcn/ui
+- [ADR 0004](docs/adr/0004-one-theme-dark.md) — why there is one theme and no toggle
 
 ## Deployment
 

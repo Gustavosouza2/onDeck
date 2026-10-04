@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 
-import { THEME_SCRIPT } from "@/lib/theme-script";
+import { GROUND } from "@/lib/brand";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -38,6 +38,12 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   viewportFit: "cover",
+  // OnDeck is dark, full stop: a volunteer reads it in a dim room, and the
+  // room does not change with the phone's setting. Next renders both metas,
+  // so the browser chrome and its form controls match the app from the first
+  // paint, with no script and nothing to flash.
+  colorScheme: "dark",
+  themeColor: GROUND,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -45,11 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="pt-BR"
       className={`${spaceGrotesk.variable} ${dmSans.variable} ${jetBrainsMono.variable}`}
-      suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
-      </head>
       <body>{children}</body>
     </html>
   );

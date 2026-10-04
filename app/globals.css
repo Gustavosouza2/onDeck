@@ -94,22 +94,3 @@
     animation: none !important;
   }
 }
-
-.theme-transition,
-.theme-transition *,
-.theme-transition *::before,
-.theme-transition *::after {
-  transition-property: background-color, border-color, color, fill, stroke,
-    text-decoration-color, outline-color;
-  transition-duration: var(--dur-base);
-  transition-timing-function: var(--ease-standard);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .theme-transition,
-  .theme-transition *,
-  .theme-transition *::before,
-  .theme-transition *::after {
-    transition: none;
-  }
-}

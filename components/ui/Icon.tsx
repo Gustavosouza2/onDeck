@@ -7,11 +7,8 @@ import {
   Film,
   type LucideProps,
   MonitorPlay,
-  Moon,
   PenTool,
   Radio,
-  Sun,
-  SunMoon,
   Video,
 } from "lucide-react";
 
@@ -23,11 +20,8 @@ const ICONS = {
   download: Download,
   film: Film,
   "monitor-play": MonitorPlay,
-  moon: Moon,
   "pen-tool": PenTool,
   radio: Radio,
-  sun: Sun,
-  "sun-moon": SunMoon,
   video: Video,
 } as const;
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { Icon } from "@/components/ui/Icon";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function AppBar({
   title,
@@ -23,7 +22,7 @@ export function AppBar({
           <Icon name="chevron-left" size="xl" />
         </Link>
 
-        <span className="min-w-0">
+        <span className="min-w-0 flex-1">
           <span className="block truncate font-display text-(length:--text-lead) leading-snug font-semibold text-(--color-title)">
             {title}
           </span>
@@ -33,8 +32,6 @@ export function AppBar({
             </span>
           ) : null}
         </span>
-
-        <ThemeToggle variant="compact" className="-mr-(--space-3) ml-auto" />
       </div>
     </div>
   );
