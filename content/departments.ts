@@ -27,7 +27,7 @@ export const departments: Departments[] = [
   {
     slug: "projecao",
     name: "Projeção",
-    summary: "Letras e avisos na tela do templo",
+    summary: "Letras e avisos no projetor",
     tool: "Holyrics",
     toolNote: "Computador da projeção · serviço “Domingo” já salvo",
     intro:
