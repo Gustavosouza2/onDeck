@@ -17,6 +17,11 @@ secondary camera, banner design, videos). It is the unit a Volunteer picks on th
 Home screen. UI: "departamento".
 _Avoid_: area, ministry, sector, role
 
+**Under construction**:
+A Department whose Runbook isn't ready for Volunteers yet. Its card stays on Home,
+dimmed and leading nowhere. UI: "Em construção".
+_Avoid_: disabled, draft, coming soon
+
 **Step**:
 A single executable action within a Department, with a required title and detail and
 an optional Tool. It is the smallest unit of the guide. A Department's Steps

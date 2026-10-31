@@ -41,4 +41,29 @@ describe("DepartmentCard", () => {
 
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
+
+  it("says nothing about construction on a Department that is ready", () => {
+    render(<DepartmentCard department={department} />);
+
+    expect(screen.queryByText("Em construção")).not.toBeInTheDocument();
+  });
+
+  describe("under construction", () => {
+    const unfinished = aDepartment({ underConstruction: true });
+
+    it("names the Department and says it is under construction", () => {
+      render(<DepartmentCard department={unfinished} />);
+
+      expect(
+        screen.getByRole("heading", { name: unfinished.name }),
+      ).toBeInTheDocument();
+      expect(screen.getByText("Em construção")).toBeInTheDocument();
+    });
+
+    it("leads nowhere", () => {
+      render(<DepartmentCard department={unfinished} />);
+
+      expect(screen.queryByRole("link")).not.toBeInTheDocument();
+    });
+  });
 });
