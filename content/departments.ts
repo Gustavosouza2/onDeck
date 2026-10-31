@@ -10,6 +10,7 @@ type Step = {
 }
 
 type Departments = {
+  underConstruction?: boolean;
   updatedAt: string;
   toolNote: string;
   summary: string;
@@ -179,6 +180,7 @@ export const departments: Departments[] = [
     motif: "fotos",
     icon: "camera",
     updatedAt: SEEDED,
+    underConstruction: true,
     steps: [
       {
         title: "Pegar o celular da mídia e conferir bateria",
@@ -316,6 +318,7 @@ export const departments: Departments[] = [
     motif: "videos",
     icon: "film",
     updatedAt: SEEDED,
+    underConstruction: true,
     steps: [
       {
         title: "Copiar a gravação do HD da mídia",

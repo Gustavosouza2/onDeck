@@ -61,6 +61,7 @@ export const departmentSchema = z.object({
   motif: z.enum(MOTIF_NAMES),
   icon: z.enum(DEPARTMENT_ICONS),
   updatedAt: z.iso.date(),
+  underConstruction: z.boolean().default(false),
   steps: z.array(stepSchema).min(1, "a Department needs at least one Step"),
 });
 

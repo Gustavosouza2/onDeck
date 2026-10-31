@@ -81,6 +81,8 @@ All content lives in [`content/departments.ts`](content/departments.ts) and is e
 
 The build validates the whole file and **fails** on anything malformed — a step without a title, a department without steps, two departments sharing a slug or a colour — so a mistake never reaches a volunteer.
 
+A department whose runbook isn't ready gets `underConstruction: true`: its card stays on Home, dimmed, labelled *Em construção* and no longer a link. Remove the line to open it.
+
 Two rules before publishing:
 
 - **Never put a credential in the content** — no passwords, logins, tokens or personal phone numbers. The site is public (though not indexed by search engines). Where a step needs a credential, say where to get it.
